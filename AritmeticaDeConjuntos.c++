@@ -16,16 +16,16 @@ vector <string> resta(vector <string> &U,vector <string> &S){
 }
 
 int interseca(vector <string> &U,vector <string> &S){
-    int tamaño=0;
+    int tamano=0;
     for(vector <string>::iterator i=S.begin();i!=S.end();++i){
         for(vector <string>::iterator j=U.begin();j!=U.end();++j){
             if (*i==*j){
-               tamaño++;
+               tamano++;
                break;
             }
         }
     } 
-    return tamaño;
+    return tamano;
 }
 
 

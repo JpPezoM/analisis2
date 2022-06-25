@@ -43,18 +43,18 @@ vector<string> restaMayor(vector<string> &U, vector<vector<string>> &S){
 }
 
 vector<vector<string>> maximizar(vector<vector<string>> &F, vector<string> &U, int k){
-    int tamaño = 0;
+    int tamano = 0;
     int n=0;
     vector<string> aux;
     vector<vector<string>> Conjunto;
     vector<vector<string>> CopiaF=F;
     while (k != 0){
         if (Conjunto.size() == 0){
-            tamaño = 0;
+            tamano = 0;
             for (vector<vector<string>>::iterator i = CopiaF.begin(); i != CopiaF.end(); ++i){
                 n = interseca(U, *i);
-                if (tamaño < n){
-                    tamaño = n;
+                if (tamano < n){
+                    tamano = n;
                     aux=*i;
                 }
             }
@@ -65,13 +65,14 @@ vector<vector<string>> maximizar(vector<vector<string>> &F, vector<string> &U, i
             for (vector<vector<string>>::iterator i = CopiaF.begin(); i != CopiaF.end(); ++i){
                 aux = unionVecdeVec(Conjunto, *i);
                 n = interseca(U, aux);
-                if (tamaño < n){
-                    tamaño = n;
+                if (tamano < n){
+                    tamano = n;
                     aux2=*i;
                 }
             }
             Conjunto.push_back(aux2);
         }
+        k--;
     }
     return Conjunto;
 }
@@ -108,7 +109,7 @@ int main()
     int k = 2;
 
     vector <vector<string>> resultado=mscp(X,F,k);
+    cout<<resultado.size()<<endl;
     // cout << endl;
-    // cout<<resultado.size()<<endl;
     return 0;
 }

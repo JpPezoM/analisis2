@@ -32,12 +32,12 @@ vector<vector<bool>> creaMatriz(vector<vector<int>> &F,vector<int> &U){
  */
 
 vector <string> maximizar(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
-    int tamaño=0;
+    int tamano=0;
     vector <string> aux;
     for (vector<vector <string>>::iterator i=F.begin();i!=F.end();++i){
         int n=interseca(U,*i);
-        if(tamaño<n){
-            tamaño=n;
+        if(tamano<n){
+            tamano=n;
             aux=*i;
         }
     }
@@ -53,12 +53,8 @@ vector <vector <string>> mscp(vector <string> x,vector <vector <string>> F){
         cout<<"U:"<<endl;
         printVectorElements(U);
         U=resta(U,S);
-        cout<<"S:"<<endl;
-        printVectorElements(S);
         cout<<"U-S:"<<endl;
         printVectorElements(U);
-        
-        cout<<"sali de la resta"<<endl;
         C.push_back(S);
     }
     return C;

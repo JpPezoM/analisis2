@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
+#include "AritmeticaDeConjuntos.c++"
 using namespace std;
 
 
@@ -29,30 +30,6 @@ vector<vector<bool>> creaMatriz(vector<vector<int>> &F,vector<int> &U){
     return matriz;
 }
  */
-vector <string> resta(vector <string> &U,vector <string> &S){
-    for(vector <string>::iterator i=S.begin();i!=S.end();++i){
-        for(vector <string>::iterator j=U.begin();j!=U.end();++j){
-            if (*i==*j){
-               U.erase(j);
-               break; 
-            }
-        }
-    } 
-    return U;
-}
-
-int interseca(vector <string> &U,vector <string> &S){
-    int tamaño=0;
-    for(vector <string>::iterator i=S.begin();i!=S.end();++i){
-        for(vector <string>::iterator j=U.begin();j!=U.end();++j){
-            if (*i==*j){
-               tamaño++;
-               break;
-            }
-        }
-    } 
-    return tamaño;
-}
 
 vector <string> maximizar(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
     int tamaño=0;
@@ -65,14 +42,6 @@ vector <string> maximizar(vector <vector <string>> &F,vector <string> &U,vector 
         }
     }
     return aux;
-}
-void printVectorElements(vector <string> &vec)
-{
-    cout << "{ ";
-    for (const auto &item : vec) {
-        cout << item << ", ";
-    }
-    cout << "\b\b }" << endl;
 }
 
 vector <vector <string>> mscp(vector <string> x,vector <vector <string>> F){

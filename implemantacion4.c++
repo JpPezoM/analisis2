@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
-#include "AritmeticaDeConjuntos.c++"
+#include "AritmeticaDeConjuntos.h"
 using namespace std;
 
 
@@ -106,7 +106,7 @@ int main()
     vector<string> G{"10", "11", "12"};
     vector<string> X{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     vector<vector<string>> F{A, B, C, D, E, G};
-    int k = 2;
+    int k = 3;
 
     vector <vector<string>> resultado=mscp(X,F,k);
     cout<<resultado.size()<<endl;

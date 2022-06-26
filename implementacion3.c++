@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
-#include "AritmeticaDeConjuntos.c++"
+#include "AritmeticaDeConjuntos.h"
 using namespace std;
 
 

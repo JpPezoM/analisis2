@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <cmath>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ set<int> uniqueElem(int m, int n, vector<bool> &matrix){
 */
 void printVector(vector<int> &lol){
     printf("(");
-    for(int l: lol) printf("%i, ", l);
+    for(int l: lol) printf("%i ", l);
     printf(")\n");
 }
 
@@ -63,32 +64,54 @@ bool setCover(vector<bool> &v, int n){
     return b;
 }
 
-/*
-void orVector(vector<bool> &u, vector<bool> &v, int  n){
-    for(int i = 0; i< n; i++){
-        u[i] = u[i] or v[i];
+void initCombi(vector<bool> &b){
+    b[0] = true;
+    for(int i= 1; i < b.size(); i++){
+        b[i] = false;
     }
 }
-*/
 
-/*
-vector<bool> extractCol(vector<bool> &matrix, int n, int p){
-    vector<bool> r = {};
-    for(int i = p; i < (p + n); i++) {
-        r.push_back(matrix[i]);
+void plusOne(vector<bool> &b){
+    int c = 0;
+    while(b[c] and c < b.size()){
+        b[c] = false;
+        c += 1;
     }
-    return r;
+    if(c <= b.size()) b[c] = true;
+    
 }
-*/
 
 vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
-    vector<int> result(m);
+    vector<int> result(m);//msc mas pequeño encontrado en el momento
     vector<bool> aux(n); //elementos añadidos en cada instante
+    vector<bool> combi(m); //vector de ayuda para calcular las combinaciones
+    int c = 1; 
+    initCombi(combi);
     initVector(result, m);
-    printVector(result);
 
+    for(int i = 0; i < pow(2,m); i++){
+        c = 1;
+        restartVector(aux, n);
+        for(int j = 0; j <= n; j++){
+            if(combi[j]){
+                //Añade la fila al aux
+                for(int l = 0; l < n; l++){
+                aux[l] = aux[l] or matrix[(j * n) + l];
+                }
+                c++;
+            }
+            if(setCover(aux, n) and result.size() > c){
+                result.clear();
+                for(int k = 0; k < n; k++){
+                    if(combi[k]) result.push_back(k);
+                }
+            }
+
+        }
+        plusOne(combi);
+    }
     //comprueba con todas las combinaciones que contienen el 1er elmento, el 2do y asi
-    for(int i = 0; i < m; i++){
+    /*for(int i = 0; i < m; i++){
         restartVector(aux, n);
         for(int j = i; j < m; j++){
 
@@ -107,7 +130,7 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
                 }
             }
         }
-    }
+    }*/
     return result;
 }
 

@@ -7,7 +7,7 @@
 #include <vector>
 #include <set>
 #include <cmath>
-#include "tools1.h"
+#include "vectorTools.h"
 using namespace std;
 
 
@@ -20,8 +20,8 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
     initVector(result, m);
 
     //testea todas las 2^m combinaciones distintas de sets
-    for(int i = 0; i < pow(2,m); i++){
-        c = 1;
+    for(int i = 0; i < pow(2,m) - 1; i++){
+        c = 0;
         restartVector(aux, n);
         for(int j = 0; j <= n; j++){
             if(combi[j]){
@@ -31,12 +31,11 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
                 }
                 c++;
             }
-
-            if(setCover(aux, n) and result.size() > c){
-                result.clear();
-                for(int k = 0; k < n; k++){
-                    if(combi[k]) result.push_back(k);
-                }
+        }
+        if(setCover(aux, n) and result.size() > c){
+            result.clear();
+            for(int k = 0; k < n; k++){
+                if(combi[k]) result.push_back(k);
             }
         }
         plusOne(combi);
@@ -48,7 +47,7 @@ int main(){
     vector<bool> carlos(6*12); // matriz de prueba
     carlos = 
     {
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
@@ -58,7 +57,8 @@ int main(){
 
     vector<int> msc;
     msc = exhaustiveSearch(6, 12, carlos);
-    printf("el minimum set cover es de tamaño: %u\n", msc.size());
+    printf("el minimum set cover es de tamaño: ");
+    cout << msc.size() << endl;
     printVector(msc);
     return 0;
 }

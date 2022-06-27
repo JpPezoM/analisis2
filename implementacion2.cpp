@@ -11,7 +11,6 @@
 using namespace std;
 
 void deleteRows(vector<int> base, vector<bool> &mat, int n){
-    //elimina filas
     int c = 0; 
     for(int i = (base.size()) - 1; i >= 0; i--){
         c = base[i] * n;
@@ -19,11 +18,8 @@ void deleteRows(vector<int> base, vector<bool> &mat, int n){
     }
 }
 
-void deleteColumns(int m, int n, vector<bool> &mat, vector<bool> &aux, int m1, int n1){
+void deleteColumns(int m, int n, vector<bool> &mat, vector<bool> &aux){
     vector<bool> newMat = {};
-    
-    
-    //elimina columnas
     for(int d= 0; d < mat.size(); d++){
         if(not aux[d%n]) newMat.push_back(mat[d]);
     }
@@ -31,12 +27,13 @@ void deleteColumns(int m, int n, vector<bool> &mat, vector<bool> &aux, int m1, i
     newMat.clear();
 
     //imprime matriz
-    for(int j = 0; j < mat.size(); j++){
+    /*for(int j = 0; j < mat.size(); j++){
             if((j % n1) == 0) cout << endl;
             cout << mat[j] << " ";
             
         }
         cout << endl;
+        */
 }
 
 vector<int> optimizedES(int m, int n, vector<bool> &matrix){
@@ -52,7 +49,7 @@ vector<int> optimizedES(int m, int n, vector<bool> &matrix){
         c = 0;
         restartVector(aux, n);
         for(int j = 0; j <= n; j++){
-            if(combi[j]){
+            if(combi[j] and result.size() > c){
                 //Añade la fila al aux
                 for(int l = 0; l < n; l++){
                 aux[l] = aux[l] or matrix[(j * n) + l];
@@ -60,7 +57,7 @@ vector<int> optimizedES(int m, int n, vector<bool> &matrix){
                 c++;
             }
         }
-        if(setCover(aux, n) and result.size() > c){
+        if(result.size() > c and setCover(aux, n) ){
             result.clear();
             for(int k = 0; k < n; k++){
                 if(combi[k]) result.push_back(k);
@@ -71,8 +68,8 @@ vector<int> optimizedES(int m, int n, vector<bool> &matrix){
     return result;
 }
 
-//añade los indices de los conjuntos con elementos unicos(que quitamos de la matriz) y corrige los indices para 
-//calzar con la matriz original
+//añade los indices de los conjuntos con elementos unicos(que quitamos de la matriz) y corrige los indices de
+//la nueva matriz calzar con la matriz original
 void correctResultIndex(vector<int> &orig, vector<int> &final){
     for(int i: orig){
         for(int j = 0; j < final.size(); j++){
@@ -80,7 +77,6 @@ void correctResultIndex(vector<int> &orig, vector<int> &final){
         }
     }
     for(int k: orig) final.push_back(k);
-
 }
 
 int main(){
@@ -124,7 +120,7 @@ int main(){
     for (bool a: aux1) a ? n1 += 0 : n1 += 1; 
 
     deleteRows(sv, carlos, n);
-    deleteColumns(m, n, carlos, aux1, m1, n1);
+    deleteColumns(m, n, carlos, aux1);
 
     vector<int> msc;
     msc = optimizedES(m1, n1, carlos);

@@ -51,10 +51,10 @@ vector <vector <string>> mscp(vector <string> x,vector <vector <string>> F){
     while (U.size()!=0){
         S=maximizar(F,U,S);
         cout<<"U:"<<endl;
-        printVectorElements(U);
+        printVector(U);
         U=resta(U,S);
         cout<<"U-S:"<<endl;
-        printVectorElements(U);
+        printVector(U);
         C.push_back(S);
     }
     return C;

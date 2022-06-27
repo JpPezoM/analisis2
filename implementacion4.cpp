@@ -14,20 +14,16 @@ vector<string> unionVecdeVec(vector<vector<string>> &v1, vector<string> &v2){
     }
     vector<string> aux = v2;
     bool repite;
-    while (aux.size() != 0)
-    {
+    while (aux.size() != 0){
         repite = false;
-        for (vector<string>::iterator i = unions.begin(); i != unions.end(); ++i)
-        {
-            if (*i == aux[0])
-            {
+        for (vector<string>::iterator i = unions.begin(); i != unions.end(); ++i){
+            if (*i == aux[0]){
                 repite = true;
                 aux.erase(aux.begin());
                 break;
             }
         }
-        if (!repite)
-        {
+        if (!repite){
             unions.push_back(aux[0]);
             aux.erase(aux.begin());
         }
@@ -76,6 +72,33 @@ vector<vector<string>> maximizar(vector<vector<string>> &F, vector<string> &U, i
     }
     return Conjunto;
 }
+int elementosEnComun(vector <string> &v1,vector <string> &v2){
+    int encomun=0;
+    for (vector<string>::iterator i=v1.begin();i!=v1.end();++i){
+        for (vector<string>::iterator j=v2.begin();j!=v2.end();++j){
+            if(*i==*j)
+                encomun++;
+        }
+    }
+    return encomun;
+}
+vector<vector<string>> optimizacion1(vector<vector<string>> &F){
+    vector<vector<string>> Resultado;
+    int Semejantes=0;
+    for(vector<vector<string>>::iterator i=F.begin();i!=F.end();++i){
+        for(vector<vector<string>>::iterator j=F.begin();j!=F.end();++j){
+            if(elementosEnComun(*i,*j)>1){
+                Semejantes++;
+            }
+        }
+        if(Semejantes==1) {Resultado.push_back(*i);
+        printVectorElements(*i);}
+        Semejantes=0;
+    }
+    return Resultado;
+}
+
+
 
 vector<vector<string>> mscp(vector<string> x, vector<vector<string>> F, int k){
     vector<string> U = x; 
@@ -91,7 +114,7 @@ vector<vector<string>> mscp(vector<string> x, vector<vector<string>> F, int k){
         for (vector<vector<string>>::iterator i = S.begin(); i != S.end(); ++i){
             C.push_back(*i);
         }
-        
+     
     }
     return C;
 }
@@ -102,13 +125,13 @@ int main()
     vector<string> B{"5", "6", "8", "9"};
     vector<string> C{"1", "4", "7", "10"};
     vector<string> D{"2", "5", "8", "11"};
-    vector<string> E{"3", "6", "9", "12"};
+    vector<string> E{"3", "6", "9"};
     vector<string> G{"10", "11", "12"};
     vector<string> X{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     vector<vector<string>> F{A, B, C, D, E, G};
-    int k = 3;
-
-    vector <vector<string>> resultado=mscp(X,F,k);
+    int k = 2;
+    //vector <vector<string>> resultado=mscp(X,F,k);
+    vector <vector<string>> resultado=optimizacion1(F);
     cout<<resultado.size()<<endl;
     // cout << endl;
     return 0;

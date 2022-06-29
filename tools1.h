@@ -1,6 +1,5 @@
 //Funciones varias para trbajar los vectores usados en la sol1 y sol2
 #include <iostream>
-#include <string>
 #include <vector>
 #include <set>
 #include <cmath>
@@ -34,7 +33,7 @@ void initVector(vector<int> &v, int n){
     }
 }
 
-//comprueba que la union de conjuntos sea setCover i.e., tiempo n (mejorable)
+//comprueba que la union de conjuntos sea setCover i.e, estan todas las columnas cubiertas, tiempo n
 bool setCover(vector<bool> &v, int n){
     bool b = true;
     for(int i = 0; i < n; i++){
@@ -43,7 +42,7 @@ bool setCover(vector<bool> &v, int n){
     return b;
 }
 
-//Inicializa los valores del arreglo en 1000... i.e. tomar el primer elemento 
+//Inicializa los valores del arreglo en 1000...000 i.e. tomar solo el primer elemento 
 void initCombi(vector<bool> &b){
     b[0] = true;
     for(int i= 1; i < b.size(); i++){
@@ -59,7 +58,6 @@ void plusOne(vector<bool> &b){
         c += 1;
     }
     if(c <= b.size()) b[c] = true;
-    
 }
 
 //encuentra todas las filas(sets) con elementos que no estan en otros sets
@@ -80,4 +78,34 @@ set<int> uniqueElem(int m, int n, vector<bool> &matrix){
         if(found == 1) unique.insert(pos);
     }
     return unique;
+}
+
+//Elimina las filas(conjuntos) con elementos unicos de la matriz original
+void deleteRows(vector<int> base, vector<bool> &mat, int n){
+    int c = 0; 
+    for(int i = (base.size()) - 1; i >= 0; i--){
+        c = base[i] * n;
+        mat.erase(mat.begin() + c, mat.begin() + (c + n)); 
+    }
+}
+
+//Elimina las columnas(elementos) que cubren las filas(conjuntos) con elem unicos de la matriz original
+void deleteColumns(int m, int n, vector<bool> &mat, vector<bool> &aux){
+    vector<bool> newMat = {};
+    for(int d= 0; d < mat.size(); d++){
+        if(not aux[d%n]) newMat.push_back(mat[d]);
+    }
+    mat.swap(newMat);
+    newMat.clear();
+}
+
+//En la sol2 quitamos los conjuntos con elementos unicos generando un nueva matriz mas pequeña
+//Corrige los resultados de ese problema mas pequeño respecto al original
+void correctResultIndex(vector<int> &orig, vector<int> &final){
+    for(int i: orig){
+        for(int j = 0; j < final.size(); j++){
+            if(i <= final[j]) final[j] += 1;
+        }
+    }
+    for(int k: orig) final.push_back(k);
 }

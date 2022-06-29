@@ -10,37 +10,12 @@
 #include "tools1.h"
 using namespace std;
 
-void deleteRows(vector<int> base, vector<bool> &mat, int n){
-    int c = 0; 
-    for(int i = (base.size()) - 1; i >= 0; i--){
-        c = base[i] * n;
-        mat.erase(mat.begin() + c, mat.begin() + (c + n)); 
-    }
-}
-
-void deleteColumns(int m, int n, vector<bool> &mat, vector<bool> &aux){
-    vector<bool> newMat = {};
-    for(int d= 0; d < mat.size(); d++){
-        if(not aux[d%n]) newMat.push_back(mat[d]);
-    }
-    mat.swap(newMat);
-    newMat.clear();
-
-    //imprime matriz
-    /*for(int j = 0; j < mat.size(); j++){
-            if((j % n1) == 0) cout << endl;
-            cout << mat[j] << " ";
-            
-        }
-        cout << endl;
-        */
-}
 
 vector<int> optimizedES(int m, int n, vector<bool> &matrix){
     vector<int> result(m);
-    vector<bool> aux(n);
-    vector<bool> combi(m);
-    int c;
+    vector<bool> aux(n); //elementos cubiertos en cada combinacion
+    vector<bool> combi(m); //vector ayuda para recorrer las combinaciones posibles
+    int c; //numero de sets añadidos en cada instante
     initCombi(combi);
     initVector(result, m);
 
@@ -49,15 +24,14 @@ vector<int> optimizedES(int m, int n, vector<bool> &matrix){
         c = 0;
         restartVector(aux, n);
         for(int j = 0; j <= n; j++){
-            if(combi[j] and result.size() > c){
-                //Añade la fila al aux
-                for(int l = 0; l < n; l++){
-                aux[l] = aux[l] or matrix[(j * n) + l];
-                }
+            //optimizacion 2: si los conjuntos agregados son mayores a la solucion parcial paso de largo
+            if(combi[j] and result.size() > c){ 
+                //Añade los elementos cubiertos por el conjunto al aux
+                for(int l = 0; l < n; l++) aux[l] = aux[l] or matrix[(j * n) + l];
                 c++;
             }
         }
-        if(result.size() > c and setCover(aux, n) ){
+        if(result.size() > c and setCover(aux, n)){
             result.clear();
             for(int k = 0; k < n; k++){
                 if(combi[k]) result.push_back(k);
@@ -68,37 +42,19 @@ vector<int> optimizedES(int m, int n, vector<bool> &matrix){
     return result;
 }
 
-//añade los indices de los conjuntos con elementos unicos(que quitamos de la matriz) y corrige los indices de
-//la nueva matriz calzar con la matriz original
-void correctResultIndex(vector<int> &orig, vector<int> &final){
-    for(int i: orig){
-        for(int j = 0; j < final.size(); j++){
-            if(i <= final[i]) final[j] += 1;
-        }
-    }
-    for(int k: orig) final.push_back(k);
-}
-
 int main(){
-    int m = 6;
-    int n = 12;
+    int m = 6; //numero de conjuntos
+    int n = 12; //numero de elementos
     vector<bool> carlos(m*n); // matriz de prueba
     carlos = 
     {
         1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 
-        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+        1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0,
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
         0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1
+        0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1
     };
-
-    for(int j = 0; j < (m * n); j++){
-            if((j % 12) == 0) cout << endl;
-            cout << carlos[j] << " ";
-            
-        }
-    cout << endl;
 
     set<int> s;
     s = uniqueElem(m, n, carlos);
@@ -119,6 +75,7 @@ int main(){
     int n1 = 0; //Nuevo numero de elementos
     for (bool a: aux1) a ? n1 += 0 : n1 += 1; 
 
+    //creo una nueva matriz que no contiene los conjuntos con elem unicos ni los elem. que cubren
     deleteRows(sv, carlos, n);
     deleteColumns(m, n, carlos, aux1);
 
@@ -132,3 +89,4 @@ int main(){
     printVector(msc);
     return 0;
 }
+ 

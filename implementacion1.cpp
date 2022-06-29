@@ -1,5 +1,5 @@
 //Min Set Cover(Unicost) Metodo Exhaustivo O(2^N * m)
-//Recibe una matriz binaria y entrega un subconjunto de filas tal que cubren todas las columnas con al menos un 1
+//Recibe una matriz binaria (1 y 0) y entrega un subconjunto de filas tal que en todas las columnas existan al menos un 1
 //TODO programar la lectura/conversion de la entrada y quitar un poco de for-loop's
 
 #include <iostream>
@@ -13,9 +13,9 @@ using namespace std;
 
 vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
     vector<int> result(m);//msc mas pequeño encontrado hasta el momento
-    vector<bool> aux(n); //elementos añadidos en cada instante
-    vector<bool> combi(m); //vector de ayuda para calcular las combinaciones
-    int c = 1; 
+    vector<bool> aux(n); //elementos cubiertos en cada iteracion
+    vector<bool> combi(m); //vector ayuda para recorrer las combinaciones posibles
+    int c; //numero de sets añadidos en cada iteracion
     initCombi(combi);
     initVector(result, m);
 
@@ -25,14 +25,12 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
         restartVector(aux, n);
         for(int j = 0; j <= n; j++){
             if(combi[j]){
-                //Añade la fila al aux
-                for(int l = 0; l < n; l++){
-                aux[l] = aux[l] or matrix[(j * n) + l];
-                }
+                //Añade los elementos cubiertos por el conjunto al aux
+                for(int l = 0; l < n; l++) aux[l] = aux[l] or matrix[(j * n) + l];
                 c++;
             }
         }
-        if(setCover(aux, n) and result.size() > c){
+        if(result.size() > c and setCover(aux, n)){
             result.clear();
             for(int k = 0; k < n; k++){
                 if(combi[k]) result.push_back(k);
@@ -44,19 +42,21 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
 }
 
 int main(){
-    vector<bool> carlos(6*12); // matriz de prueba
+    int m = 6; //numero de conjuntos 
+    int n = 12; //numero de elementos
+    vector<bool> carlos(m*n); // matriz de prueba
     carlos = 
-    {
+     {
         1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 
-        1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
+        1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0,
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
         0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1
+        0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1
     };
 
     vector<int> msc;
-    msc = exhaustiveSearch(6, 12, carlos);
+    msc = exhaustiveSearch(m, n, carlos);
     printf("el minimum set cover es de tamaño: ");
     cout << msc.size() << endl;
     printVector(msc);

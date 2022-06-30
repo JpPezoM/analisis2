@@ -109,3 +109,18 @@ void correctResultIndex(vector<int> &orig, vector<int> &final){
     }
     for(int k: orig) final.push_back(k);
 }
+
+void initV(vector<bool> &b){
+    for(int i= 0; i < b.size(); i++){
+        b[i] = false;
+    }
+}
+int findIndex(const vector<string> &arr, string item) {
+
+    for (auto i = 0; i < arr.size(); ++i) {
+        if (arr[i] == item)
+            return i;
+    }
+
+    return -1;
+}

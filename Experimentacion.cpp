@@ -12,10 +12,15 @@ vector<vector<string>> generaConjunto(int n,int m){
     int num,x;
     vector<string> S;
     vector<vector<string>> C;
+
+    vector<bool> aux100(n); //vector para mantener rastro de que elementos se han añadido
+    initV(aux100);
+
     for(int j=0;j<m;j++){
         x=rand()%n+1;//Tamaño del Conjunto S
         for(int i=0;i<x;i++){
             num=rand()%x+1;
+            aux100[num-1] = true; //si aparece el elemento lo actualizo en el vector
             S.push_back(to_string(num));
         }
         sort(S.begin(), S.end());
@@ -23,8 +28,19 @@ vector<vector<string>> generaConjunto(int n,int m){
         C.push_back(S);
         S.clear();
     }
+
+    //agrego los elementos que no aparecieron en el for anterior a un conjunto aleatorio, de esa manera
+    //estan todos los elem del universo en algun conjunto
+    int y = 0;
+    for(int z = 0;  z < n; z++){
+        if(not aux100[z]){
+            y = rand() % n;
+            C[y].push_back(to_string(z + 1));
+        }
+    }
     return C;
 }
+
 vector<bool> generaConjuntoBinario(int n,int m){
     int num;
     vector<bool> conjunto(n*m);

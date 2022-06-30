@@ -1,13 +1,35 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <set>
 #include <algorithm>
 #include "AritmeticaDeConjuntos.h"
 using namespace std;
 
 
+vector <string> maximizarG(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
+    int tamano=0;
+    vector <string> aux;
+    for (vector<vector <string>>::iterator i=F.begin();i!=F.end();++i){
+        int n=interseca(U,*i);
+        if(tamano<n){
+            tamano=n;
+            aux=*i;
+        }
+    }
+    return aux;
+}
 
+vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
+    vector <string> U=x;//{1,1,1,1,1,1,1,1}->{0,0,0,0,0,0,0,0,0,0}
+    vector <vector <string>> C;
+    vector <string> S;
+    while (U.size()!=0){
+        S=maximizarG(F,U,S);
+        U=resta(U,S);
+        C.push_back(S);
+    }
+    return C;
+}
 
 vector<vector<string>> optimizacion1(vector<vector<string>> &F){
     vector<vector<string>> Resultado;
@@ -70,33 +92,15 @@ vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F, int 
     vector<string> U = x;
     vector<vector<string>> S= optimizacion1(copia);
     if (S.size()!=0){
-        S = maximizar(copia, U, S,k);
+        S = maximizarGp(copia, U, S,k);
         U = restaVecConjunto(U, S);
         C=agregaVec(S,C);
     }
     S.clear();
     while (U.size() != 0){
-        printVector(U);
-        S = maximizargP(copia, U,S,k);
+        S = maximizarGp(copia, U,S,k);
         U = restaVecConjunto(U, S);
-        printConjunto(S);
         C=agregaVec(S,C);
     }
     return C;
 }
-
-/*int main(){
-    vector<string> A{"1", "2", "3", "4", "5", "6"};
-    vector<string> B{"5", "6", "8", "9"};
-    vector<string> C{"1", "4", "7", "10"};
-    vector<string> D{"2", "5", "8", "11"};
-    vector<string> E{"3", "6", "9"};
-    vector<string> G{"10", "11", "12"};
-    vector<string> X{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-    vector<vector<string>> F{A, B, C, D, E, G};
-    int k = 2;
-    vector <vector<string>> resultado=mscp(X,F,k);
-    cout<<resultado.size()<<endl;
-    // cout << endl;
-    return 0;
-}*/

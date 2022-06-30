@@ -29,7 +29,7 @@ int interseca(vector <string> &U,vector <string> &S){
 }
 
 
-void printVector(vector <string> &vec)
+/* void printVector(vector <string> &vec)
 {
     cout << "{ ";
     for (const auto &item : vec) {
@@ -48,7 +48,7 @@ void printConjunto(vector<vector<string>> &vec)
     }
     
     
-}
+} */
 
 vector<string> unionVectores(vector <string> &v1,vector <string> &v2){
     if(v1.size()==0){

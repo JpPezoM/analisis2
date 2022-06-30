@@ -31,7 +31,7 @@ vector<vector<bool>> creaMatriz(vector<vector<int>> &F,vector<int> &U){
 }
  */
 
-vector <string> maximizar(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
+vector <string> maximizarG(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
     int tamano=0;
     vector <string> aux;
     for (vector<vector <string>>::iterator i=F.begin();i!=F.end();++i){
@@ -44,23 +44,19 @@ vector <string> maximizar(vector <vector <string>> &F,vector <string> &U,vector 
     return aux;
 }
 
-vector <vector <string>> mscp(vector <string> x,vector <vector <string>> F){
+vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
     vector <string> U=x;//{1,1,1,1,1,1,1,1}->{0,0,0,0,0,0,0,0,0,0}
     vector <vector <string>> C;
     vector <string> S;
     while (U.size()!=0){
-        S=maximizar(F,U,S);
-        cout<<"U:"<<endl;
-        printVector(U);
+        S=maximizarG(F,U,S);
         U=resta(U,S);
-        cout<<"U-S:"<<endl;
-        printVector(U);
         C.push_back(S);
     }
     return C;
 }
 
-int main(){
+/*int main(){
     vector <string> A{"1","2","3","4","5","6"};
     vector <string> B{"5","6","8","9"};
     vector <string> C{"1","4","7","10"};
@@ -81,4 +77,4 @@ int main(){
     cout << endl;
     cout<<resultado.size()<<endl;
     return 0;
-}
+}*/

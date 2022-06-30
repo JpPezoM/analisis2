@@ -1,16 +1,16 @@
 CC=g++
 CFLAGS=-Wall -O3 -std=c++14
-BINS=1 2 3 4
-all: clean 1 2 3 4
+BINS=MSC_Exhaustivo MSC_Optimizado MSC_Greedy MSC_GreedyOp
+all: clean MSC_Exhaustivo MSC_Optimizado MSC_Greedy MSC_GreedyOp
 
-1:
-	$(CC) $(CFLAGS) -o 1 implementacion1.cpp
-2:
-	$(CC) $(CFLAGS) -o 2 implementacion2.cpp
-3:
-	$(CC) $(CFLAGS) -o 3 implementacion3.cpp
-4:
-	$(CC) $(CFLAGS) -o 4 implementacion4.cpp
+MSC_Exhaustivo:
+	$(CC) $(CFLAGS) -o MSC_Exhaustivo implementacion1.cpp
+MSC_Optimizado:
+	$(CC) $(CFLAGS) -o MSC_Optimizado implementacion2.cpp
+MSC_Greedy:
+	$(CC) $(CFLAGS) -o MSC_Greedy implementacion3.cpp
+MSC_GreedyOp:
+	$(CC) $(CFLAGS) -o MSC_GreedyOp implementacion4.cpp
 
 clean:
 	@echo " [CLN] Removing binary files"

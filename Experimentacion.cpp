@@ -34,24 +34,21 @@ vector<bool> generaConjuntoBinario(int n,int m){
     }
     return conjunto;
 }
-vector<bool> TraduceVector(int n,int m,vector<vector<string>> &F,vector<string> &U){
-    vector<bool> traducido(U.size()*m);
-    vector <string> S;
-    initV(traducido);
-    int numS=0;
-    for(vector<vector <string>>::iterator i=F.begin();i!=F.end();++i){
-        S=*i;
-        for(vector <string>::iterator j=U.begin();j!=U.end();++j){
-            int pos=findIndex(U,*j);
-            if (*find(S.begin(), S.end(), *j) == *j){
-                pos=findIndex(U,*j);
-                traducido[(pos+(U.size()*numS))]=true;
-            }
-          else traducido[(pos*numS)]=false;
+
+vector<bool> TraduceVector(int n,int m,vector<vector<string>> F){
+    //Inicia la matriz con todos sus valores en 0
+    vector<bool> matrixB(m*n);
+    for(int j = 0; j < (m * n); j++) matrixB[j] = false;
+
+    //Añade 1 en la pos que indica el elemento de matriz original
+    int a = 0;
+    for(int i = 0; i < F.size(); i++){
+        for(string s: F[i]){
+        a = atoi(s.c_str()) -1;
+        matrixB[(i * n) + a] = true; 
         }
-        numS++;
-    }
-    return traducido;
+   }
+    return matrixB;
 }
 
 
@@ -74,7 +71,7 @@ int main(int argc, char **argv){
         X=unionVectores(X,F[i]);
     }
 
-    vector<bool> binario=TraduceVector(n,m,F,X);
+    vector<bool> binario=TraduceVector(n,m,F);
 
     t1 = clock();
     double time = (double(t1-t0)/CLOCKS_PER_SEC);

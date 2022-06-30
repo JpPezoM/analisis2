@@ -7,7 +7,7 @@
 #include <vector>
 #include <set>
 #include <cmath>
-#include "tools1.h"
+#include "Funciones/tools1.h"
 using namespace std;
 
 

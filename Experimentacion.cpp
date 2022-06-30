@@ -4,8 +4,8 @@
 #include <random>
 #include <cmath>
 #include <ctime> 
-#include "greedy.h"
-#include "busqueda.h"
+#include "Implementaciones/Funciones/greedy.h"
+#include "Implementaciones/Funciones/busqueda.h"
 using namespace std;
 
 vector<vector<string>> generaConjunto(int n,int m){
@@ -39,16 +39,6 @@ vector<vector<string>> generaConjunto(int n,int m){
         }
     }
     return C;
-}
-
-vector<bool> generaConjuntoBinario(int n,int m){
-    int num;
-    vector<bool> conjunto(n*m);
-    for(int i=0;i<n*m;i++){
-        num=rand()%2;
-        conjunto.push_back(num);
-    }
-    return conjunto;
 }
 
 vector<bool> TraduceVector(int n,int m,vector<vector<string>> F){
@@ -93,7 +83,7 @@ int main(int argc, char **argv){
     double time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Creacion de la Matriz: " << time << endl;
 
-    /* //Ejecucion de soluciones
+     //Ejecucion de soluciones
     //Exhaustivo
     t0=clock();
     vector<int> resul=exhaustiveSearch(m,n,binario);
@@ -116,14 +106,14 @@ int main(int argc, char **argv){
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Greedy:" << time << endl;
     cout<<resultado.size()<<endl;
+    //Greedy Optimizado
     t0=clock();
-    int limite=log2(min(n,m))+1;
-    int k=rand()%limite;
-    //resultado=mscpGp(X,F,k);
+    resultado=mscpGp(X,F);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Greedy Optimizado:" << time << endl;
-    cout<<resultado.size()<<endl; */
+    cout<<resultado.size()<<endl;
+
     cout<< "Universo:";
     printVectorstring(X);
     printConjunto(F);

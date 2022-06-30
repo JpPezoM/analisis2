@@ -3,33 +3,8 @@
 #include <string>
 #include <set>
 #include <algorithm>
-#include "AritmeticaDeConjuntos.h"
+#include "Funciones/AritmeticaDeConjuntos.h"
 using namespace std;
-
-
-
-/* vector<bool> Fila(vector<int> &U,vector<int> &S){
-    vector<bool> elementos;
-    for(int i=0;i<U.size();i++){
-        elementos.push_back(false);
-        for(int j=0;j<S.size();j++){
-            if(U[i]==S[j]){
-                elementos[i]=true;
-                break;
-            }
-        }
-    }
-    return elementos;
-}
-
-vector<vector<bool>> creaMatriz(vector<vector<int>> &F,vector<int> &U){
-    vector<vector<bool>> matriz;
-    for (int i = 0; i < F.size(); i++){
-        matriz.push_back(Fila(U,F[i]));
-    }
-    return matriz;
-}
- */
 
 vector <string> maximizarG(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
     int tamano=0;
@@ -45,7 +20,7 @@ vector <string> maximizarG(vector <vector <string>> &F,vector <string> &U,vector
 }
 
 vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
-    vector <string> U=x;//{1,1,1,1,1,1,1,1}->{0,0,0,0,0,0,0,0,0,0}
+    vector <string> U=x;
     vector <vector <string>> C;
     vector <string> S;
     while (U.size()!=0){
@@ -65,24 +40,10 @@ int main(){
     vector <string> G{"10","11","12"};
     vector <string> X{"1","2","3","4","5","6","7","8","9","10","11","12"};
     vector <vector <string>> F{A,B,C,D,E,G};
-    int n=10,m=10;
-    //n fila y m columnas
-    int num;
-    vector<bool> conjunto(n*m);
-    for(int i=0;i<n*m;i++){
-        num=rand()%2;
-        conjunto.push_back(num);
-    }
 
-    //printVectorElements(xd);
-    //vector <vector <bool>> M=creaMatriz(F,X);
-    //for (int i = 0; i < M.size(); i++)
-    //{
-    //    printVectorElements(M[i]);
-    //}
-
-    //vector <vector<string>> resultado=mscp(X,F);
+    vector <vector<string>> resultado=mscpG(X,F);
+    
     cout << endl;
-    //cout<<resultado.size()<<endl;
+    cout<<resultado.size()<<endl;
     return 0;
 }

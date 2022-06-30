@@ -2,34 +2,9 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "AritmeticaDeConjuntos.h"
+#include <cmath>
+#include "Funciones/AritmeticaDeConjuntos.h"
 using namespace std;
-
-
-vector <string> maximizarG(vector <vector <string>> &F,vector <string> &U,vector <string> &S){
-    int tamano=0;
-    vector <string> aux;
-    for (vector<vector <string>>::iterator i=F.begin();i!=F.end();++i){
-        int n=interseca(U,*i);
-        if(tamano<n){
-            tamano=n;
-            aux=*i;
-        }
-    }
-    return aux;
-}
-
-vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
-    vector <string> U=x;//{1,1,1,1,1,1,1,1}->{0,0,0,0,0,0,0,0,0,0}
-    vector <vector <string>> C;
-    vector <string> S;
-    while (U.size()!=0){
-        S=maximizarG(F,U,S);
-        U=resta(U,S);
-        C.push_back(S);
-    }
-    return C;
-}
 
 
 
@@ -70,10 +45,7 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux=*i;
                 }
             }
-            if(seEncuentra(aux,Conjunto)){
-                k=0;
-                break;
-            }
+            if(seEncuentra(aux,Conjunto)) break;
             Conjunto.push_back(aux);
         }
         else{
@@ -94,8 +66,10 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
     return Conjunto;
 }
 
-
-vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F, int k){
+vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F){
+    int limite=log2(min(x.size(),F.size()))+1;
+    int k=rand()%limite;
+    cout<<"K="<<k<<endl;
     vector<vector<string>> C;
     vector<vector<string>> copia= F;
     vector<string> U = x;
@@ -112,4 +86,19 @@ vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F, int 
         C=agregaVec(S,C);
     }
     return C;
+}
+
+int main(){
+    vector<string> A{"1", "2", "3", "4", "5", "6"};
+    vector<string> B{"5", "6", "8", "9"};
+    vector<string> C{"1", "4", "7", "10"};
+    vector<string> D{"2", "5", "8", "11"};
+    vector<string> E{"3", "6", "9"};
+    vector<string> G{"10", "11", "12"};
+    vector<string> X{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+    vector<vector<string>> F{A, B, C, D, E, G};
+    vector <vector<string>> resultado=mscpGp(X,F);
+    cout<<resultado.size()<<endl;
+    // cout << endl;
+    return 0;
 }

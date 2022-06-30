@@ -37,21 +37,13 @@ int interseca(vector <string> &U,vector <string> &S){
     }
     cout << "\b\b }" << endl;
 }
- void printVectorsbool(vector <bool> &vec,int n)
-{   
-    int contador=0;
-    cout << "{ ";
-    for (const auto &item : vec) {
-        contador++;
-        cout << item << ", ";
-        if (contador==n){
-            contador=0;
-            cout<<endl;
-        }
-        
+ void printVectorsbool(vector <bool> &vec,int n) {   
+    for(int j= 0; j < vec.size(); j++){
+        cout << vec[j];
+        (j % n == (n -1)) ? cout << endl : cout << " ";
+        }    
     }
-    cout << "\b\b }" << endl;
-}
+
 void printConjunto(vector<vector<string>> &vec)
 {
     for (vector<vector<string>>::iterator i=vec.begin();i!=vec.end();++i){ 

@@ -45,6 +45,7 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux=*i;
                 }
             }
+            if(seEncuentra(aux,Conjunto)) break;
             Conjunto.push_back(aux);
         }
         else{
@@ -57,6 +58,7 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux2=*i;
                 }
             }
+             if(seEncuentra(aux2,Conjunto)) break;
             Conjunto.push_back(aux2);
         }
         k--;

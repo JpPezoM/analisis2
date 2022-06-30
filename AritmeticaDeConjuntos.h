@@ -49,6 +49,15 @@ void printConjunto(vector<vector<string>> &vec)
     
     
 } */
+bool seEncuentra(vector<string> &U, vector<vector<string>> &S){
+    for(vector<vector<string>>::iterator i=S.begin();i!=S.end();++i){
+        if(*i==U){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 vector<string> unionVectores(vector <string> &v1,vector <string> &v2){
     if(v1.size()==0){

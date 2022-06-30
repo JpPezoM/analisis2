@@ -31,6 +31,9 @@ vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
     return C;
 }
 
+
+
+
 vector<vector<string>> optimizacion1(vector<vector<string>> &F){
     vector<vector<string>> Resultado;
     int Semejantes=0;
@@ -67,6 +70,7 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux=*i;
                 }
             }
+            if(seEncuentra(aux,Conjunto)) break;
             Conjunto.push_back(aux);
         }
         else{
@@ -79,12 +83,14 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux2=*i;
                 }
             }
+             if(seEncuentra(aux2,Conjunto)) break;
             Conjunto.push_back(aux2);
         }
         k--;
     }
     return Conjunto;
 }
+
 
 vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F, int k){
     vector<vector<string>> C;

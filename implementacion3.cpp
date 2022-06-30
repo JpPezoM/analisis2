@@ -56,7 +56,7 @@ vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
     return C;
 }
 
-/*int main(){
+int main(){
     vector <string> A{"1","2","3","4","5","6"};
     vector <string> B{"5","6","8","9"};
     vector <string> C{"1","4","7","10"};
@@ -65,7 +65,15 @@ vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
     vector <string> G{"10","11","12"};
     vector <string> X{"1","2","3","4","5","6","7","8","9","10","11","12"};
     vector <vector <string>> F{A,B,C,D,E,G};
-    //vector<bool> xd=Fila(X,A);
+    int n=10,m=10;
+    //n fila y m columnas
+    int num;
+    vector<bool> conjunto(n*m);
+    for(int i=0;i<n*m;i++){
+        num=rand()%2;
+        conjunto.push_back(num);
+    }
+    
     //printVectorElements(xd);
     //vector <vector <bool>> M=creaMatriz(F,X);
     //for (int i = 0; i < M.size(); i++)
@@ -77,4 +85,4 @@ vector <vector <string>> mscpG(vector <string> x,vector <vector <string>> F){
     cout << endl;
     cout<<resultado.size()<<endl;
     return 0;
-}*/
+}

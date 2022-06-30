@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 		cout << "Error. Debe ejecutarse como ./Experimentacion n m" << endl;
 		exit(EXIT_FAILURE);
 	} 
-	int TamañoU= atoi(argv[1]);
+	int TamanoU= atoi(argv[1]);
     int NumeroConjuntos= atoi(argv[2]);
 
     unsigned t0, t1;
@@ -45,13 +45,13 @@ int main(int argc, char **argv){
     t0=clock();
     vector<vector<string>>F;
     for(int i=0;i<NumeroConjuntos;i++){
-        F.push_back(generaConjunto(TamañoU));
+        F.push_back(generaConjunto(TamanoU));
     }
     vector<string>X;
     for(int i=0;i<NumeroConjuntos;i++){
         X=unionVectores(X,F[i]);
     }
-    vector<bool> binario=generaConjuntoBinario(TamañoU,NumeroConjuntos);
+    vector<bool> binario=generaConjuntoBinario(TamanoU,NumeroConjuntos);
 
     t1 = clock();
     double time = (double(t1-t0)/CLOCKS_PER_SEC);
@@ -60,14 +60,14 @@ int main(int argc, char **argv){
     //Ejecucion de soluciones
     //Exhaustivo
     t0=clock();
-    vector<int> resul=exhaustiveSearch(NumeroConjuntos,TamañoU,binario);
+    vector<int> resul=exhaustiveSearch(NumeroConjuntos,TamanoU,binario);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Busqueda exhaustiva:" << time << endl;
     cout<<resul.size()<<endl;
     //Busqueda optimizada
     t0=clock();
-    resul=mscBusquedaOp(TamañoU,NumeroConjuntos,binario);
+    resul=mscBusquedaOp(TamanoU,NumeroConjuntos,binario);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Busqueda optimizada:" << time << endl;
@@ -81,7 +81,7 @@ int main(int argc, char **argv){
     cout << "Ejecucion Algoritmo Greedy:" << time << endl;
     cout<<resultado.size()<<endl;
     t0=clock();
-    int limite=log2(min(TamañoU,NumeroConjuntos))+1;
+    int limite=log2(min(TamanoU,NumeroConjuntos))+1;
     int k=rand()%limite;
     //resultado=mscpGp(X,F,k);
     t1 = clock();

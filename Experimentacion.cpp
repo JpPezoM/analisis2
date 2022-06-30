@@ -13,9 +13,11 @@ vector<string> generaConjunto(int U){
     vector<string> conjunto;
     n=rand()%U+1;
     for(int i=0;i<n;i++){
-        num=rand()%100;
+        num=rand()%n;
         conjunto.push_back(to_string(num));
     }
+    sort(conjunto.begin(), conjunto.end());
+    conjunto.erase(unique(conjunto.begin(), conjunto.end()), conjunto.end());
     return conjunto;
 }
 vector<bool> generaConjuntoBinario(int n,int m){
@@ -81,11 +83,12 @@ int main(int argc, char **argv){
     t0=clock();
     int limite=log2(min(TamañoU,NumeroConjuntos))+1;
     int k=rand()%limite;
-    resultado=mscpGp(X,F,k);
+    //resultado=mscpGp(X,F,k);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Greedy Optimizado:" << time << endl;
     cout<<resultado.size()<<endl;
+    printVectorstring(X);
     
     return 0;
 }

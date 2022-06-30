@@ -29,7 +29,7 @@ int interseca(vector <string> &U,vector <string> &S){
 }
 
 
-/* void printVector(vector <string> &vec)
+ void printVectorstring(vector <string> &vec)
 {
     cout << "{ ";
     for (const auto &item : vec) {
@@ -48,7 +48,7 @@ void printConjunto(vector<vector<string>> &vec)
     }
     
     
-} */
+}
 bool seEncuentra(vector<string> &U, vector<vector<string>> &S){
     for(vector<vector<string>>::iterator i=S.begin();i!=S.end();++i){
         if(*i==U){

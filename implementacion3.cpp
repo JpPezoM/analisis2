@@ -73,7 +73,7 @@ int main(){
         num=rand()%2;
         conjunto.push_back(num);
     }
-    
+
     //printVectorElements(xd);
     //vector <vector <bool>> M=creaMatriz(F,X);
     //for (int i = 0; i < M.size(); i++)
@@ -81,8 +81,8 @@ int main(){
     //    printVectorElements(M[i]);
     //}
 
-    vector <vector<string>> resultado=mscp(X,F);
+    //vector <vector<string>> resultado=mscp(X,F);
     cout << endl;
-    cout<<resultado.size()<<endl;
+    //cout<<resultado.size()<<endl;
     return 0;
 }

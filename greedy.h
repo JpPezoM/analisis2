@@ -70,7 +70,10 @@ vector<vector<string>> maximizarGp(vector<vector<string>> &F, vector<string> &U,
                     aux=*i;
                 }
             }
-            if(seEncuentra(aux,Conjunto)) break;
+            if(seEncuentra(aux,Conjunto)){
+                k=0;
+                break;
+            }
             Conjunto.push_back(aux);
         }
         else{

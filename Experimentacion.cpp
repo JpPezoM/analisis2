@@ -86,14 +86,14 @@ int main(int argc, char **argv){
      //Ejecucion de soluciones
     //Exhaustivo
     t0=clock();
-    vector<int> resul=exhaustiveSearch(m,n,binario);
+    //vector<int> resul=exhaustiveSearch(m,n,binario);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Busqueda exhaustiva:" << time << endl;
-    cout<<resul.size()<<endl;
+    //cout<<resul.size()<<endl;
     //Busqueda optimizada
     t0=clock();
-    resul=mscBusquedaOp(n,m,binario);
+    vector<int>resul=mscBusquedaOp(n,m,binario);
     t1 = clock();
     time = (double(t1-t0)/CLOCKS_PER_SEC);
     cout << "Ejecucion Algoritmo Busqueda optimizada:" << time << endl;

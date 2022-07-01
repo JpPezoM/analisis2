@@ -113,8 +113,6 @@ vector<vector<string>> mscpGp(vector<string> &x, vector<vector<string>> &F){
         U = restaVecConjunto(U, S);
         C=agregaVec(S,C);
     }
-    S.clear();
-
     int limite=log2(min(x.size(),f.size()))+1;
     int k=rand()%limite+1;
     

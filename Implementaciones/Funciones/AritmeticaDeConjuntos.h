@@ -139,3 +139,13 @@ vector<vector<string>> agregaVec(vector<vector<string>> &S,vector<vector<string>
         }
     return C;
 }
+
+int findIndex(const vector<string> &arr, string item) {
+
+    for (auto i = 0; i < arr.size(); ++i) {
+        if (arr[i] == item)
+            return i;
+    }
+
+    return -1;
+}

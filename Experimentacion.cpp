@@ -114,12 +114,5 @@ int main(int argc, char **argv){
     cout << "Ejecucion Algoritmo Greedy Optimizado:" << time << endl;
     cout<<resultado.size()<<endl;
 
-    cout<< "Universo:";
-    printVectorstring(X);
-    printConjunto(F);
-    cout<<"bool:"<<binario.size()<<endl;
-    printVectorsbool(binario,X.size());
-
-    
     return 0;
 }

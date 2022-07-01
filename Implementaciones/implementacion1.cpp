@@ -23,7 +23,7 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
     for(int i = 0; i < pow(2,m) - 1; i++){
         c = 0;
         restartVector(aux, n);
-        for(int j = 0; j <= n; j++){
+        for(int j = 0; j < m; j++){
             if(combi[j]){
                 //Añade los elementos cubiertos por el conjunto al aux
                 for(int l = 0; l < n; l++) aux[l] = aux[l] or matrix[(j * n) + l];
@@ -32,7 +32,7 @@ vector<int> exhaustiveSearch(int m, int n, vector<bool> &matrix){
         }
         if(result.size() > c and setCover(aux, n)){
             result.clear();
-            for(int k = 0; k < n; k++){
+            for(int k = 0; k < m; k++){
                 if(combi[k]) result.push_back(k);
             }
         }
